@@ -6,8 +6,6 @@ signage.config(['$resourceProvider', '$httpProvider', function($resourceProvider
 }]);
 
 signage.controller('SignageController', ['$scope', '$timeout', '$resource', function($scope, $timeout, $resource) {
-  $scope.slides = [];
-
   function isCurrentSlideIndex(index) {
     return $scope.currentIndex === index;
   }
@@ -16,12 +14,15 @@ signage.controller('SignageController', ['$scope', '$timeout', '$resource', func
     try {
       return $scope.slides[$scope.currentIndex].duration * 1000;
     } catch (err) {
-      return 3000;
+      return 7000;
     }
   }
 
   function nextSlide() {
     $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
+    if ($scope.currentIndex === 0) {
+      updateSlides();
+    }
     $timeout(nextSlide, getSlideDuration());
   }
 
@@ -29,17 +30,18 @@ signage.controller('SignageController', ['$scope', '$timeout', '$resource', func
     var Update = $resource('json/');
 
     Update.get(function(data) {
-      $scope.slides = data.slides;
+      if ($scope.slides !== data.slides) {
+        $scope.slides = data.slides;
+      }
     });
-
-    $timeout(updateSlides, 3000);
   }
 
-  $scope.nextSlide = nextSlide;
-  $scope.isCurrentSlideIndex = isCurrentSlideIndex;
   $scope.currentIndex = -1;
+  $scope.slides = [];
 
-  updateSlides();
+  $scope.isCurrentSlideIndex = isCurrentSlideIndex;
+  $scope.nextSlide = nextSlide;
+
   nextSlide();
 }]);
 
@@ -80,7 +82,7 @@ signage.directive('bgImage', ['$window', function($window) {
   }
 }]);
 
-signage.animation('.animate', function($window) {
+signage.animation('.animate', function() {
   return {
     enter: function(element, done) {
       TweenMax.fromTo(element, 1, {opacity: 0}, {opacity: 1, onComplete: done});
