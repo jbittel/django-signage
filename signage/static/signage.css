@@ -1,16 +1,20 @@
 * {
-    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjbQg61aAAAADUlEQVQYV2P4//8/IwAI/QL/+TZZdwAAAABJRU5ErkJggg=='),
-            url(img/blank.cur),
-            none !important;
+  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjbQg61aAAAADUlEQVQYV2P4//8/IwAI/QL/+TZZdwAAAABJRU5ErkJggg=='),
+          url(img/blank.cur),
+          none !important;
 }
 
-html,
-body,
-#container,
-#main,
-.slider,
-.flexslider,
-.slides,
-.slides li {
-    height: 100%
+html {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  min-height: 100%;
+}
+
+.slide {
+  position: fixed;
+  top: 0;
+  left: 0;
 }

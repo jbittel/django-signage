@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-#from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed
 from django.utils import timezone
 from django.views.generic import View
 from django.views.generic import DetailView
@@ -17,10 +17,10 @@ class DisplayView(DetailView):
 
 class DisplayJSONView(View):
 
-#    def dispatch(self, request, *args, **kwargs):
-#        if not request.is_ajax():
-#            return HttpResponseNotAllowed(['XMLHttpRequest'])
-#        return super(DisplayJSONView, self).dispatch(request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        if not request.is_ajax():
+            return HttpResponseNotAllowed(['XMLHttpRequest'])
+        return super(DisplayJSONView, self).dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         objects = self.get_object_data(**kwargs)

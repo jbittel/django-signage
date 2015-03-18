@@ -1,146 +1,22 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en" ng-app="signage">
 <head>
-  <meta content="charset=utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <script type="text/javascript" src="{% static "modernizr.js" %}"></script>
-  <link rel="stylesheet" href="{% static "flexslider.css" %}" type="text/css" media="screen" />
-  <link rel="stylesheet" href="{% static "signage.css" %}" type="text/css" media="screen" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <link rel="stylesheet" href="{% static "signage.css" %}" type="text/css" />
 </head>
-<body class="loading">
-  <div id="container" class="cf">
-    <div id="main" role="main">
-      <section class="slider">
-        <div class="flexslider"></div>
-      </section>
-    </div>
+<body ng-controller="SignageController">
+  {% verbatim %}
+  <div class="slider">
+    <img bg-image class="slide animate" ng-repeat="slide in slides" ng-if="isCurrentSlideIndex($index)" ng-src="{{ slide.image }}">
   </div>
-  <!-- jQuery -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-  <script type="text/javascript">
-    var mySlides = new Array();
-
-    $(window).load(function(){
-      var hash = false;
-      var createSlider = function() {
-        $('.flexslider').flexslider({
-          animation: "fade",
-          slideshowSpeed: 7000,
-          controlNav: false,
-          directionNav: false,
-          pauseOnAction: false,
-          pauseOnHover: false,
-          pausePlay: false,
-          after: function(slider){
-            // If there is data about the current slide in our array, use it.
-            if (slider.currentSlide in mySlides) {
-              clearInterval(slider.animatedSlides);
-              slider.animatedSlides = setInterval(slider.animateSlides, mySlides[slider.currentSlide].duration * 1000);
-            }
-          },
-          start: function(slider){
-            $('body').removeClass('loading');
-          }
-        });
-      };
-
-      // Load content type through AJAX
-      var updateSlides = function() {
-
-        var ajaxUpdate = $.ajax({
-          url: "json/",
-          type: "GET",
-          dataType: "json",
-          success: function(data) {
-            var index = 0;
-            var last = "";
-            var rebuild = false;
-            var slidesHTML = '';
-
-            // If reset flag has been set, refresh the page for a JS Update.
-            if (hash === false) {
-              hash = data.hash;
-            } else if (hash !== data.hash) {
-              location.reload();
-            }
-
-            // Go through each slide that may need to be added or removed from current slideshow.
-            $(data.slides).each( function(){
-              if (this.type === 'video') {
-                // If current array does not have this index or the img or timer has changed, rebuild slideshow.
-                if (!(index in mySlides) || this.url !== mySlides[index].url) {
-                  rebuild = true;
-                }
-
-                // Update local slides array
-                mySlides[index] = {"url":this.url};
-
-                //slidesHTML += '<li><iframe src="' + this.url + '" frameborder="0" height="100%" width="100%" scrolling="none"></iframe></li>';
-                slidesHTML += '<iframe src="' + this.url + '" frameborder="0" height="100%" width="100%" scrolling="none"></iframe>';
-
-              } else {
-                // If current array does not have this index or the img or timer has changed, rebuild slideshow.
-                if (!(index in mySlides) || this.image !== mySlides[index].image || this.duration !== mySlides[index].duration) {
-                  rebuild = true;
-                }
-
-                // Update local slides array
-                mySlides[index] = {"image":this.image, "duration":this.duration};
-
-                slidesHTML += '<li><img src="{{ MEDIA_URL }}' + this.image + '" /></li>';
-              }
-
-              index++;
-            });
-
-            // This means slides were removed, make sure we rebuild the slideshow as to remove the extra slides.
-            if (mySlides.length > index) {
-              // Remove all the slides from the new end point (var index) forward.
-              mySlides.splice(index, Number.MAX_VALUE);
-              rebuild = true;
-            }
-
-            if (rebuild === true) {
-              $('.flexslider').fadeOut(function() {
-                $('.slider').html('');
-                var newSlider = '<div class="flexslider"><ul class="slides">' + slidesHTML + '</ul></div>';
-                // Changed visibility style so that the height of the page doesn't change when fading out slider
-                $('.slider').css('visibility', 'hidden');
-                // Updated the HTML of the new slideshow
-                $('.slider').html(newSlider);
-                // Call the function to initiate new slideshow
-                createSlider();
-                // Fade out current slide show
-                $('.flexslider').fadeOut(function() {
-                  // Set visibility of slider on, so that it can be seen when fading in
-                  $('.slider').css('visibility', 'visible');
-                  // Fade in new slideshow
-                  $('.flexslider').fadeIn();
-                });
-              });
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            // Log error every time a bad ajax call happens
-            console.log('error ' + textStatus + " " + errorThrown);
-          }
-        });
-
-        return ajaxUpdate;
-      };
-
-      updateSlides();
-
-      setInterval(function(){
-        updateSlides();
-      }, 60000);
-    });
-
-  </script>
-
-  <script type="text/javascript" src="{% static "jquery.flexslider-min.js" %}"></script>
-
+  {% endverbatim %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+  <script src="{% static "js/angular-animate.min.js" %}"></script>
+  <script src="{% static "js/angular-resource.min.js" %}"></script>
+  <script src="{% static "js/TweenMax.min.js" %}"></script>
+  <script src="{% static "js/signage.js" %}"></script>
 </body>
 </html>

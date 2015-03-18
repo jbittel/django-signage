@@ -2,6 +2,7 @@ import hashlib
 import json
 
 from django.core.serializers.json import Serializer
+from django.db.models import ImageField
 from django.template.loaders.app_directories import Loader
 from django.utils.encoding import smart_text
 
@@ -10,6 +11,12 @@ class FlatSerializer(Serializer):
     def get_dump_object(self, obj):
         self._current['type'] = smart_text(obj._meta).split('.')[1]
         return self._current
+
+    def handle_field(self, obj, field):
+        if isinstance(field, ImageField):
+            self._current[field.name] = field._get_val_from_obj(obj).url
+        else:
+            super(FlatSerializer, self).handle_field(obj, field)
 
     def get_template_hash(self, template_name):
         loader = Loader()
