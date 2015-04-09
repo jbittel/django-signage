@@ -6,7 +6,7 @@ signage.config(['$resourceProvider', '$httpProvider', function($resourceProvider
 }]);
 
 signage.controller('SignageController', ['$scope', '$timeout', '$resource', function($scope, $timeout, $resource) {
-  function isCurrentSlideIndex(index) {
+  function isCurrentSlide(index) {
     return $scope.currentIndex === index;
   }
 
@@ -39,7 +39,7 @@ signage.controller('SignageController', ['$scope', '$timeout', '$resource', func
   $scope.currentIndex = -1;
   $scope.slides = [];
 
-  $scope.isCurrentSlideIndex = isCurrentSlideIndex;
+  $scope.isCurrentSlide = isCurrentSlide;
   $scope.nextSlide = nextSlide;
 
   nextSlide();

@@ -9,7 +9,7 @@
 <body ng-controller="SignageController">
   {% verbatim %}
   <div class="slider">
-    <img bg-image class="slide animate" ng-repeat="slide in slides" ng-if="isCurrentSlideIndex($index)" ng-src="{{ slide.image }}">
+    <img bg-image class="slide animate" ng-repeat="slide in slides" ng-if="isCurrentSlide($index)" ng-src="{{ slide.image }}">
   </div>
   {% endverbatim %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
