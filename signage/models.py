@@ -65,6 +65,3 @@ class Display(models.Model):
 
     def get_absolute_url(self):
         return reverse('signage_display', args=[str(self.pk)])
-
-    def get_json_url(self):
-        return self.get_absolute_url() + 'json/'
