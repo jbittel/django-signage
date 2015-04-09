@@ -19,9 +19,8 @@ signage.controller('SignageController', ['$scope', '$timeout', '$resource', func
   }
 
   function nextSlide() {
-    $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
-    if ($scope.currentIndex === 0) {
-      updateSlides();
+    if ($scope.slides) {
+      $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
     }
     $timeout(nextSlide, getSlideDuration());
   }
@@ -30,18 +29,21 @@ signage.controller('SignageController', ['$scope', '$timeout', '$resource', func
     var Update = $resource('json/');
 
     Update.get(function(data) {
-      if ($scope.slides !== data.slides) {
+      if (!angular.equals($scope.slides, data.slides)) {
         $scope.slides = data.slides;
       }
     });
+
+    $timeout(updateSlides, 10000);
   }
 
-  $scope.currentIndex = -1;
+  $scope.currentIndex = 0;
   $scope.slides = [];
 
   $scope.isCurrentSlide = isCurrentSlide;
   $scope.nextSlide = nextSlide;
 
+  updateSlides();
   nextSlide();
 }]);
 
