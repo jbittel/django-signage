@@ -1,0 +1,21 @@
+{% extends "signage/base.html" %}
+
+{% block content %}
+  {% include "signage/_header.html" %}
+
+  <div class="row">
+    {% for slide in slide_list %}
+      <div class="col-xs-6 col-md-2">
+        <div class="thumbnail">
+          <a href="{% url "signage:slide_update" slide.pk %}">
+            <img src="{{ slide.image.url }}">
+            <div class="caption">
+              <h3>{{ slide.name }}</h3>
+              <p>{{ slide.description }}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

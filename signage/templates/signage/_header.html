@@ -1,0 +1,12 @@
+{% load active %}
+
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="{% active "signage:display_list" %}"><a href="{% url "signage:display_list" %}"><span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span> Displays</a></li>
+        <li class="{% active "signage:slide_list" %}"><a href="{% url "signage:slide_list" %}"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Slides</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>

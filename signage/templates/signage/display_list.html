@@ -1,0 +1,20 @@
+{% extends "signage/base.html" %}
+
+{% block content %}
+  {% include "signage/_header.html" %}
+
+  <div class="row">
+    {% for display in display_list %}
+      <div class="col-xs-6 col-md-3">
+        <div class="thumbnail">
+          <a href="{% url "signage:display_update" display.pk %}">
+            <div class="caption">
+              <h3>{{ display.name }}</h3>
+              <p>{{ display.description }}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

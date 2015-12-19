@@ -1,13 +1,16 @@
-from django.conf.urls import patterns
 from django.conf.urls import url
 
-from .views import DisplayView
-from .views import DisplayJSONView
+from .views import DisplayList
+from .views import DisplayUpdate
+from .views import SlideList
+from .views import SlideUpdate
 
 
-urlpatterns = patterns('',
-    url(r'^(?P<pk>[\d]+)/$',
-        DisplayView.as_view(), name='signage_display'),
-    url(r'^(?P<display>[\d]+)/json/$',
-        DisplayJSONView.as_view(), name='signage_display_json'),
-)
+app_name = 'signage'
+
+urlpatterns = [
+    url(r'^displays/$', DisplayList.as_view(), name='display_list'),
+    url(r'^displays/(?P<pk>\d+)/$', DisplayUpdate.as_view(), name='display_update'),
+    url(r'^slides/$', SlideList.as_view(), name='slide_list'),
+    url(r'^slides/(?P<pk>\d+)/$', SlideUpdate.as_view(), name='slide_update'),
+]

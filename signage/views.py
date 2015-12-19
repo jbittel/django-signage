@@ -1,37 +1,23 @@
-from django.http import HttpResponse
-from django.http import HttpResponseNotAllowed
-from django.utils import timezone
-from django.views.generic import View
-from django.views.generic import DetailView
+from django.views.generic import ListView
+from django.views.generic import UpdateView
 
 from .models import Display
-from .models import Slider
-from .models import Video
-from .serializer import serialize
+from .models import Slide
 
 
-class DisplayView(DetailView):
+class DisplayList(ListView):
     model = Display
-    context_object_name = 'display'
 
 
-class DisplayJSONView(View):
+class DisplayUpdate(UpdateView):
+    model = Display
+    fields = ['name', 'description', 'tags']
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.is_ajax():
-            return HttpResponseNotAllowed(['XMLHttpRequest'])
-        return super(DisplayJSONView, self).dispatch(request, *args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
-        objects = self.get_object_data(**kwargs)
-        return self.render_json_response(objects)
+class SlideList(ListView):
+    model = Slide
 
-    def get_object_data(self, **kwargs):
-        display = {'display__pk': kwargs['display']}
-        if Video.timeframed.filter(**display).count():
-            return Video.timeframed.filter(**display)
-        else:
-            return Slider.objects.get(**display).slides.all()
 
-    def render_json_response(self, objects):
-        return HttpResponse(serialize(objects), content_type='application/json')
+class SlideUpdate(UpdateView):
+    model = Slide
+    fields = ['name', 'description', 'image', 'start', 'end', 'duration', 'weight', 'tags']
