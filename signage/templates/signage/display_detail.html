@@ -3,6 +3,10 @@
 
 {% block ng_app %}signage{% endblock ng_app %}
 
+{% block css %}
+  <link rel="stylesheet" href="{% static "css/signage.css" %}">
+{% endblock css %}
+
 {% block content %}
   {% verbatim %}
   <div class="slider" ng-controller="SignageController">
@@ -12,6 +16,8 @@
 {% endblock content %}
 
 {% block javascript %}
+  {{ block.super }}
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="{% static "js/angular-animate.min.js" %}"></script>
   <script src="{% static "js/angular-resource.min.js" %}"></script>
   <script src="{% static "js/TweenMax.min.js" %}"></script>
