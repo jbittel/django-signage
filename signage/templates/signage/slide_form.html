@@ -2,10 +2,10 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <form action="" method="post">
+  <form enctype="multipart/form-data" action="" method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a href="{% url "signage:slide_list" %}" class="btn btn-default" role="button">Done</a></p>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url "signage:slide_list" %}" class="btn btn-default" role="button">Done</a>
   </form>
 {% endblock content %}

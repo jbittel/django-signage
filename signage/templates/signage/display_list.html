@@ -4,12 +4,24 @@
   {% include "signage/_header.html" %}
 
   <div class="row">
+    <div class="col-xs-6 col-md-3">
+      <div class="thumbnail">
+        <a href="{% url "signage:display_create" %}">
+          <div class="caption">
+            <h3 class="text-center"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></h3>
+            <h3 class="text-center">Create Display</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+
     {% for display in display_list %}
       <div class="col-xs-6 col-md-3">
         <div class="thumbnail">
           <a href="{% url "signage:display_update" display.pk %}">
             <div class="caption">
-              <h3>{{ display.name }}</h3>
+              <h3 class="text-center"><span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span></h3>
+              <h3 class="text-center">{{ display.name }}</h3>
               <p>{{ display.description }}</p>
             </div>
           </a>
