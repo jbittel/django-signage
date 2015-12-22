@@ -1,0 +1,10 @@
+{% extends "signage/base.html" %}
+
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete {{ display }}?</p>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url "signage:display_update" display.pk %}" class="btn btn-default" role="button">Cancel</a>
+  </form>
+{% endblock content %}
