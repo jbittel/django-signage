@@ -36,6 +36,9 @@ class Slide(TimeFramedModel):
     def get_absolute_url(self):
         return reverse('signage:slide_update', args=[self.pk])
 
+    def get_displays(self):
+        return Display.objects.filter(tags__name__in=self.tags.names()).distinct()
+
 
 @python_2_unicode_compatible
 class Display(models.Model):
@@ -55,3 +58,6 @@ class Display(models.Model):
 
     def get_absolute_url(self):
         return reverse('signage:display_update', args=[self.pk])
+
+    def get_slides(self):
+        return Slide.objects.filter(tags__name__in=self.tags.names()).distinct()

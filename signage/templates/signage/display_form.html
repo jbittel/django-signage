@@ -2,13 +2,29 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <form action="" method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url "signage:display_list" %}" class="btn btn-default" role="button">Done</a>
-    {% if display %}
-      <a href="{% url "signage:display_delete" display.pk %}" class="btn btn-danger pull-right" role="button">Delete</a>
-    {% endif %}
-  </form>
+  <div class="row">
+    <div class="col-md-9">
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url "signage:display_list" %}" class="btn btn-default" role="button">Done</a>
+        {% if display %}
+          <a href="{% url "signage:display_delete" display.pk %}" class="btn btn-danger pull-right" role="button">Delete</a>
+        {% endif %}
+      </form>
+    </div>
+    <div class="col-md-3">
+      {% for slide in display.get_slides %}
+        <div class="thumbnail">
+          <a href="{% url "signage:slide_update" slide.pk %}">
+            <img src="{{ slide.image.url }}">
+            <div class="caption">
+              <h3 class="text-center">{{ slide.name }}</h3>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock content %}
