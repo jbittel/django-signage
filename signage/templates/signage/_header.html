@@ -7,6 +7,10 @@
         <li class="{% active "signage:display_list" %}"><a href="{% url "signage:display_list" %}"><span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span> Displays</a></li>
         <li class="{% active "signage:slide_list" %}"><a href="{% url "signage:slide_list" %}"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Slides</a></li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url "signage:display_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Display</a></li>
+        <li><a href="{% url "signage:slide_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Slide</a></li>
+      </ul>
     </div>
   </nav>
 </header>
