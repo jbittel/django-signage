@@ -5,8 +5,11 @@ from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
 
+from rest_framework.generics import ListAPIView
+
 from .models import Display
 from .models import Slide
+from .serializers import SlideSerializer
 
 
 class DisplayDetail(DetailView):
@@ -25,6 +28,14 @@ class DisplayCreate(CreateView):
 class DisplayDelete(DeleteView):
     model = Display
     success_url = reverse_lazy('signage:display_list')
+
+
+class DisplaySlides(ListAPIView):
+    serializer_class = SlideSerializer
+
+    def get_queryset(self):
+        display = Display.objects.get(pk=self.kwargs['pk'])
+        return display.get_slides()
 
 
 class DisplayUpdate(UpdateView):

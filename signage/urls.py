@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^display/create/$', views.DisplayCreate.as_view(), name='display_create'),
     url(r'^display/(?P<pk>\d+)/delete/$', views.DisplayDelete.as_view(), name='display_delete'),
     url(r'^display/(?P<pk>\d+)/update/$', views.DisplayUpdate.as_view(), name='display_update'),
+    url(r'^display/(?P<pk>\d+)/slides/$', views.DisplaySlides.as_view(), name='display_slides'),
     url(r'^displays/$', views.DisplayList.as_view(), name='display_list'),
     url(r'^slide/create/$', views.SlideCreate.as_view(), name='slide_create'),
     url(r'^slide/(?P<pk>\d+)/delete/$', views.SlideDelete.as_view(), name='slide_delete'),
