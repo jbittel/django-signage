@@ -1,26 +1,18 @@
 from django.conf.urls import url
 
-from .views import DisplayCreate
-from .views import DisplayDelete
-from .views import DisplayDetail
-from .views import DisplayList
-from .views import DisplayUpdate
-from .views import SlideCreate
-from .views import SlideDelete
-from .views import SlideList
-from .views import SlideUpdate
+from . import views
 
 
 app_name = 'signage'
 
 urlpatterns = [
-    url(r'^(?P<pk>\d+)/$', DisplayDetail.as_view(), name='display'),
-    url(r'^displays/$', DisplayList.as_view(), name='display_list'),
-    url(r'^displays/create/$', DisplayCreate.as_view(), name='display_create'),
-    url(r'^displays/delete/(?P<pk>\d+)/$', DisplayDelete.as_view(), name='display_delete'),
-    url(r'^displays/update/(?P<pk>\d+)/$', DisplayUpdate.as_view(), name='display_update'),
-    url(r'^slides/$', SlideList.as_view(), name='slide_list'),
-    url(r'^slides/create/$', SlideCreate.as_view(), name='slide_create'),
-    url(r'^slides/delete/(?P<pk>\d+)/$', SlideDelete.as_view(), name='slide_delete'),
-    url(r'^slides/update/(?P<pk>\d+)/$', SlideUpdate.as_view(), name='slide_update'),
+    url(r'^display/(?P<pk>\d+)/$', views.DisplayDetail.as_view(), name='display'),
+    url(r'^display/create/$', views.DisplayCreate.as_view(), name='display_create'),
+    url(r'^display/(?P<pk>\d+)/delete/$', views.DisplayDelete.as_view(), name='display_delete'),
+    url(r'^display/(?P<pk>\d+)/update/$', views.DisplayUpdate.as_view(), name='display_update'),
+    url(r'^displays/$', views.DisplayList.as_view(), name='display_list'),
+    url(r'^slide/create/$', views.SlideCreate.as_view(), name='slide_create'),
+    url(r'^slide/(?P<pk>\d+)/delete/$', views.SlideDelete.as_view(), name='slide_delete'),
+    url(r'^slide/(?P<pk>\d+)/update/$', views.SlideUpdate.as_view(), name='slide_update'),
+    url(r'^slides/$', views.SlideList.as_view(), name='slide_list'),
 ]
