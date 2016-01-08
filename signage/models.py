@@ -60,4 +60,4 @@ class Display(models.Model):
         return reverse('signage:display_update', args=[self.pk])
 
     def get_slides(self):
-        return Slide.objects.filter(tags__name__in=self.tags.names()).distinct()
+        return Slide.objects.filter(tags__name__in=self.tags.names()).order_by('weight').distinct()
