@@ -6,7 +6,7 @@
   <div class="row">
     {% for slide in slide_list %}
       <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
+        <div class="thumbnail {% if not slide.active %}inactive{% endif %}">
           <a href="{% url "signage:slide_update" slide.pk %}">
             <img src="{{ slide.image.url }}">
             <div class="caption">

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 
 from model_utils.models import TimeFramedModel
 from taggit.managers import TaggableManager
@@ -33,6 +34,9 @@ class Slide(TimeFramedModel):
     def __str__(self):
         return self.name
 
+    def active(self):
+        return (self.start is None or self.start <= now()) and (self.end is None or self.end >= now())
+
     def get_absolute_url(self):
         return reverse('signage:slide_update', args=[self.pk])
 
@@ -60,4 +64,4 @@ class Display(models.Model):
         return reverse('signage:display_update', args=[self.pk])
 
     def get_slides(self):
-        return Slide.objects.filter(tags__name__in=self.tags.names()).order_by('weight').distinct()
+        return Slide.timeframed.filter(tags__name__in=self.tags.names()).order_by('weight').distinct()
