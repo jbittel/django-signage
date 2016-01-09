@@ -1,21 +1,16 @@
-var signage = angular.module('signage', ['ngAnimate', 'ngResource']);
+var signage = angular.module('signage', ['ngAnimate']);
 
-signage.config(['$resourceProvider', '$httpProvider', function($resourceProvider, $httpProvider) {
-  $resourceProvider.defaults.stripTrailingSlashes = false;
+signage.config(['$httpProvider', function($httpProvider) {
   $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
 }]);
 
-signage.controller('SignageController', ['$scope', '$timeout', '$resource', function($scope, $timeout, $resource) {
+signage.controller('SignageController', ['$http', '$scope', '$timeout', function($http, $scope, $timeout) {
   function isCurrentSlide(index) {
     return $scope.currentIndex === index;
   }
 
   function getSlideDuration() {
-    try {
-      return $scope.slides[$scope.currentIndex].duration * 1000;
-    } catch (err) {
-      return 7000;
-    }
+    return $scope.slides[$scope.currentIndex].duration * 1000;
   }
 
   function nextSlide() {
@@ -26,11 +21,9 @@ signage.controller('SignageController', ['$scope', '$timeout', '$resource', func
   }
 
   function updateSlides() {
-    var Update = $resource('json/');
-
-    Update.get(function(data) {
-      if (!angular.equals($scope.slides, data.slides)) {
-        $scope.slides = data.slides;
+    $http.get('/display/1/slides/').then(function(response) {
+      if (!angular.equals($scope.slides, response.data)) {
+        $scope.slides = response.data;
       }
     });
 
