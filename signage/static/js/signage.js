@@ -1,24 +1,28 @@
-var signage = angular.module('signage', ['ngAnimate']);
+angular.module('signage', ['ngAnimate'])
 
-signage.config(['$httpProvider', function($httpProvider) {
+.config(['$httpProvider', function($httpProvider) {
   $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-}]);
+}])
 
-signage.controller('SignageController', ['$http', '$scope', '$timeout', function($http, $scope, $timeout) {
-  function isCurrentSlide(index) {
+.controller('SignageController', ['$http', '$scope', '$timeout', function($http, $scope, $timeout) {
+  $scope.isCurrentSlide = function(index) {
     return $scope.currentIndex === index;
-  }
+  };
 
   function getSlideDuration() {
-    return $scope.slides[$scope.currentIndex].duration * 1000;
-  }
+    if ($scope.slides.length) {
+      return $scope.slides[$scope.currentIndex].duration * 1000;
+    } else {
+      return 0;
+    }
+  };
 
-  function nextSlide() {
+  $scope.nextSlide = function() {
     if ($scope.slides) {
       $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
     }
-    $timeout(nextSlide, getSlideDuration());
-  }
+    $timeout($scope.nextSlide, getSlideDuration());
+  };
 
   function updateSlides() {
     $http.get('/display/1/slides/').then(function(response) {
@@ -28,19 +32,16 @@ signage.controller('SignageController', ['$http', '$scope', '$timeout', function
     });
 
     $timeout(updateSlides, 10000);
-  }
+  };
 
   $scope.currentIndex = 0;
   $scope.slides = [];
 
-  $scope.isCurrentSlide = isCurrentSlide;
-  $scope.nextSlide = nextSlide;
-
   updateSlides();
-  nextSlide();
-}]);
+  $scope.nextSlide();
+}])
 
-signage.directive('bgImage', ['$window', function($window) {
+.directive('bgImage', ['$window', function($window) {
   return function(scope, element, attrs) {
     var resizeBG = function() {
       var bgwidth = element.width();
@@ -75,9 +76,9 @@ signage.directive('bgImage', ['$window', function($window) {
       resizeBG();
     });
   }
-}]);
+}])
 
-signage.animation('.animate', function() {
+.animation('.animate', function() {
   return {
     enter: function(element, done) {
       TweenMax.fromTo(element, 1, {opacity: 0}, {opacity: 1, onComplete: done});

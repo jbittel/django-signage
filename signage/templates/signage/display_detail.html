@@ -1,11 +1,11 @@
 {% extends "signage/base.html" %}
-{% load static from staticfiles %}
-
-{% block ng_app %}signage{% endblock ng_app %}
+{% load static %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static "css/signage.css" %}">
 {% endblock css %}
+
+{% block ng_app %}signage{% endblock ng_app %}
 
 {% block content %}
   {% verbatim %}
@@ -17,8 +17,8 @@
 
 {% block javascript %}
   {{ block.super }}
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
   <script src="{% static "js/signage.js" %}"></script>
 {% endblock javascript %}
