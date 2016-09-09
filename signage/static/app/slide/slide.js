@@ -37,10 +37,9 @@ angular.module('signage.slide', ['djng.urls'])
   $scope.nextSlide();
 }])
 
-.service('slideService', ['$http', 'djangoUrl', function($http, djangoUrl) {
+.service('slideService', ['$http', 'djangoUrl', 'displayContext', function($http, djangoUrl, displayContext) {
   this.getSlides = function() {
-    // TODO Remove hard-coded display ID
-    return $http.get(djangoUrl.reverse('signage:display_slides', {'pk': '1'}))
+    return $http.get(djangoUrl.reverse('signage:display_slides', {'pk': displayContext.pk}))
       .then(function(response) {
         return response.data;
       });

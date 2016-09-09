@@ -23,4 +23,12 @@
   <script src="{% static "djng/js/django-angular.js" %}"></script>
   <script src="{% static "app/app.js" %}"></script>
   <script src="{% static "app/slide/slide.js" %}"></script>
+  <script>
+    angular.module('signage.context', [])
+      .factory('displayContext', function() {
+        return {
+          pk: "{{ display.pk|default:'' }}",
+        }
+      });
+  </script>
 {% endblock javascript %}

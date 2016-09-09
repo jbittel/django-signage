@@ -2,6 +2,7 @@
 
 angular.module('signage', [
   'ngAnimate',
+  'signage.context',
   'signage.slide',
 ])
 
