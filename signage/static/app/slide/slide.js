@@ -1,49 +1,44 @@
 angular.module('signage.slide', ['djng.urls'])
 
-.controller('SignageController', ['$scope', '$timeout', 'slideService', function($scope, $timeout, slideService) {
-  $scope.isCurrentSlide = function(index) {
-    return $scope.currentIndex === index;
-  };
-
-  function getSlideDuration() {
-    if ($scope.slides.length) {
-      return $scope.slides[$scope.currentIndex].duration * 1000;
-    } else {
-      return 0;
-    }
-  }
-
-  $scope.nextSlide = function() {
-    if ($scope.slides) {
-      $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
-    }
-    $timeout($scope.nextSlide, getSlideDuration());
-  };
-
-  function updateSlides() {
-    slideService.getSlides()
-      .then(function(slides) {
-        if (!angular.equals($scope.slides, slides)) {
-          $scope.slides = slides;
-        }
-      });
-    $timeout(updateSlides, 10000);
-  }
-
-  $scope.currentIndex = 0;
-  $scope.slides = [];
-
-  updateSlides();
-  $scope.nextSlide();
+.controller('SignageController', ['$scope', 'slideService', function($scope, slideService) {
+  $scope.slideService = slideService;
 }])
 
-.service('slideService', ['$http', 'djangoUrl', 'displayContext', function($http, djangoUrl, displayContext) {
-  this.getSlides = function() {
-    return $http.get(djangoUrl.reverse('signage:display_slides', {'pk': displayContext.pk}))
-      .then(function(response) {
-        return response.data;
-      });
+.factory('slideService', ['$http', '$timeout', 'displayContext', 'djangoUrl', function($http, $timeout, displayContext, djangoUrl) {
+  var currentIndex = 0;
+  var service = {
+    slides: [],
   };
+
+  service.isCurrentSlide = function(index) {
+    return currentIndex === index;
+  };
+
+  var nextSlide = function() {
+    var duration = 0;
+
+    if (service.slides.length) {
+      currentIndex = (currentIndex < service.slides.length - 1) ? ++currentIndex : 0;
+      duration = service.slides[currentIndex].duration * 1000;
+    }
+    $timeout(nextSlide, duration);
+  };
+
+  var updateSlides = function() {
+    $http.get(djangoUrl.reverse('signage:display_slides', {'pk': displayContext.pk}))
+      .then(function(response) {
+        if (!angular.equals(service.slides, response.data)) {
+          service.slides = response.data;
+        }
+      });
+    // TODO don't hardcode update interval
+    $timeout(updateSlides, 10000);
+  };
+
+  updateSlides();
+  nextSlide();
+
+  return service;
 }])
 
 .directive('bgImage', ['$window', function($window) {

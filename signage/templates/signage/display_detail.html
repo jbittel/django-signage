@@ -10,7 +10,7 @@
 {% block content %}
   {% verbatim %}
   <div class="slider" ng-controller="SignageController">
-    <img bg-image class="slide animate" ng-repeat="slide in slides" ng-if="isCurrentSlide($index)" ng-src="{{ slide.image }}">
+    <img bg-image class="slide animate" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
   </div>
   {% endverbatim %}
 {% endblock content %}
