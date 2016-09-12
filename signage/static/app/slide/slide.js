@@ -1,9 +1,5 @@
 angular.module('signage.slide', ['djng.urls'])
 
-.controller('SignageController', ['$scope', 'slideService', function($scope, slideService) {
-  $scope.slideService = slideService;
-}])
-
 .factory('slideService', ['$http', '$timeout', 'displayContext', 'djangoUrl', function($http, $timeout, displayContext, djangoUrl) {
   var currentIndex = 0;
   var service = {

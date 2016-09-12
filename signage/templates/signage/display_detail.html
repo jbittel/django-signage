@@ -9,9 +9,11 @@
 
 {% block content %}
   {% verbatim %}
-  <div class="slider" ng-controller="SignageController">
-    <img bg-image class="slide animate" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
-  </div>
+  <span ng-controller="ContentController">
+    <div class="slider">
+      <img bg-image class="slide animate" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
+    </div>
+  </span>
   {% endverbatim %}
 {% endblock content %}
 
@@ -23,6 +25,7 @@
   <script src="{% static "djng/js/django-angular.js" %}"></script>
   <script src="{% static "app/app.js" %}"></script>
   <script src="{% static "app/slide/slide.js" %}"></script>
+  <script src="{% static "app/video/video.js" %}"></script>
   <script>
     angular.module('signage.context', [])
       .factory('displayContext', function() {
