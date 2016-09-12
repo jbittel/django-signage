@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
-from django.http import Http404
+from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView
 from django.views.generic import DeleteView
 from django.views.generic import DetailView
@@ -38,20 +38,16 @@ class DisplaySlides(ListAPIView):
     serializer_class = SlideSerializer
 
     def get_queryset(self):
-        try:
-            return Display.objects.get(pk=self.kwargs['pk']).get_slides()
-        except Display.DoesNotExist:
-            raise Http404
+        display = get_object_or_404(Display, pk=self.kwargs['pk'])
+        return display.get_slides()
 
 
 class DisplayVideo(RetrieveAPIView):
     serializer_class = VideoSerializer
 
-    def get_queryset(self):
-        try:
-            return Display.objects.get(pk=self.kwargs['pk']).get_video()
-        except Display.DoesNotExist:
-            raise Http404
+    def get_object(self):
+        display = get_object_or_404(Display, pk=self.kwargs['pk'])
+        return display.get_video()
 
 
 class DisplayUpdate(UpdateView):
