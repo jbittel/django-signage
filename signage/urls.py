@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^display/(?P<pk>\d+)/delete/$', views.DisplayDelete.as_view(), name='display_delete'),
     url(r'^display/(?P<pk>\d+)/update/$', views.DisplayUpdate.as_view(), name='display_update'),
 
-    url(r'^display/(?P<pk>\d+)/$', views.DisplayDetail.as_view(), name='display'),
+    url(r'^display/(?P<pk>\d+)/$', views.DisplayDetail.as_view(), name='display_view'),
     url(r'^display/(?P<pk>\d+)/slides/$', views.DisplaySlides.as_view(), name='display_slides'),
     url(r'^display/(?P<pk>\d+)/video/$', views.DisplayVideo.as_view(), name='display_video'),
 
