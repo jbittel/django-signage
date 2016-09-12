@@ -60,6 +60,9 @@ class Display(models.Model):
     description = models.TextField(
         blank=True,
     )
+    update_interval = models.PositiveIntegerField(
+        default=10,
+    )
 
     tags = TaggableManager()
 

@@ -26,7 +26,7 @@ class DisplayList(ListView):
 
 class DisplayCreate(CreateView):
     model = Display
-    fields = ['name', 'description', 'tags']
+    fields = ['name', 'description', 'update_interval', 'tags']
 
 
 class DisplayDelete(DeleteView):
@@ -56,7 +56,7 @@ class DisplayVideo(RetrieveAPIView):
 
 class DisplayUpdate(UpdateView):
     model = Display
-    fields = ['name', 'description', 'tags']
+    fields = ['name', 'description', 'update_interval', 'tags']
 
 
 class SlideList(ListView):

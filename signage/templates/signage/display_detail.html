@@ -27,7 +27,8 @@
     angular.module('signage.context', [])
       .factory('displayContext', function() {
         return {
-          pk: "{{ display.pk|default:'' }}",
+          pk: "{{ display.pk }}",
+          interval: "{{ display.update_interval }}",
         }
       });
   </script>

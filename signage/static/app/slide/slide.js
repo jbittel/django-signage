@@ -31,8 +31,7 @@ angular.module('signage.slide', ['djng.urls'])
           service.slides = response.data;
         }
       });
-    // TODO don't hardcode update interval
-    $timeout(updateSlides, 10000);
+    $timeout(updateSlides, displayContext.interval * 1000);
   };
 
   updateSlides();
