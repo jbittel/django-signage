@@ -14,4 +14,8 @@ angular.module('signage', [
 .controller('ContentController', ['$scope', 'slideService', 'videoService', function($scope, slideService, videoService) {
   $scope.slideService = slideService;
   $scope.videoService = videoService;
+
+  $scope.hasVideo = function() {
+    return Boolean($scope.videoService.url);
+  }
 }]);

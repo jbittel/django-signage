@@ -10,8 +10,11 @@
 {% block content %}
   {% verbatim %}
   <span ng-controller="ContentController">
-    <div class="slider">
+    <div ng-if="!hasVideo()">
       <img bg-image class="slide animate" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
+    </div>
+    <div ng-if="hasVideo()">
+      <video height="240" width="426" play-video></video>
     </div>
   </span>
   {% endverbatim %}
@@ -22,6 +25,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
   <script src="{% static "djng/js/django-angular.js" %}"></script>
   <script src="{% static "app/app.js" %}"></script>
   <script src="{% static "app/slide/slide.js" %}"></script>
