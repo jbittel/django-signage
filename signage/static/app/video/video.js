@@ -33,5 +33,9 @@ angular.module('signage.video', ['djng.urls'])
         element.get(0).play();
       });
     }
+
+    element.on('$destroy', function() {
+      hls.destroy();
+    });
   };
 }]);
