@@ -11,7 +11,7 @@
   {% verbatim %}
   <span ng-controller="ContentController">
     <div ng-if="!hasVideo()">
-      <img bg-image class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
+      <img resize-slide class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
     </div>
     <div ng-if="hasVideo()">
       <video play-video></video>

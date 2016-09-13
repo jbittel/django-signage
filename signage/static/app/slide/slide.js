@@ -36,39 +36,13 @@ angular.module('signage.slide', ['djng.urls', 'ngAnimate'])
   return service;
 }])
 
-.directive('bgImage', ['$window', function($window) {
+.directive('resizeSlide', ['$window', function($window) {
   return function(scope, element, attrs) {
-    var resizeBG = function() {
-      var bgwidth = element.width();
-      var bgheight = element.height();
-
-      var winwidth = $window.innerWidth;
-      var winheight = $window.innerHeight;
-
-      var widthratio = winwidth / bgwidth;
-      var heightratio = winheight / bgheight;
-
-      var widthdiff = heightratio * bgwidth;
-      var heightdiff = widthratio * bgheight;
-
-      if (heightdiff > winheight) {
-        element.css({
-          width: winwidth + 'px',
-          height: winheight + 'px'
-        });
-      } else {
-        element.css({
-          width: widthdiff + 'px',
-          height: heightdiff + 'px'
-        });
-      }
-    };
-
-    var windowElement = angular.element($window);
-    windowElement.resize(resizeBG);
-
     element.bind('load', function() {
-      resizeBG();
+      element.css({
+        width: $window.innerWidth + 'px',
+        height: $window.innerHeight + 'px'
+      });
     });
   };
 }]);
