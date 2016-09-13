@@ -27,11 +27,11 @@ angular.module('signage.video', ['djng.urls'])
 
     if (Hls.isSupported()) {
       var hls = new Hls();
-      hls.attachMedia(element.get(0));
+      hls.attachMedia(element[0]);
       hls.on(Hls.Events.MEDIA_ATTACHED, function() {
         hls.loadSource(videoService.url);
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
-          element.get(0).play();
+          element[0].play();
         });
       });
 

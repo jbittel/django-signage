@@ -1,5 +1,7 @@
 {% extends "signage/base.html" %}
 
+{% block title %}{{ block.super }} - Delete Video?{% endblock title %}
+
 {% block content %}
   <form action="" method="post">
     {% csrf_token %}

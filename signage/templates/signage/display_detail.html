@@ -1,27 +1,59 @@
-{% extends "signage/base.html" %}
-{% load static %}
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    html {
+      height: 100%;
+    }
 
-{% block css %}
-  <link rel="stylesheet" href="{% static "css/signage.css" %}">
-{% endblock css %}
+    body {
+      cursor: none !important;
+      overflow: hidden;
+      margin: 0;
+      min-height: 100%;
+    }
 
-{% block ng_app %}signage{% endblock ng_app %}
+    .slide {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
 
-{% block content %}
+    .slide.ng-enter {
+      transition: 1s linear all;
+      opacity: 0;
+    }
+
+    .slide.ng-enter.ng-enter-active {
+      opacity: 1;
+    }
+
+    .slide.ng-leave {
+      transition: 1s linear all;
+      opacity: 1;
+    }
+
+    .slide.ng-leave.ng-leave-active {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body ng-app="signage">
   {% verbatim %}
-  <span ng-controller="ContentController">
-    <div ng-if="!hasVideo()">
-      <img resize-slide class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
-    </div>
-    <div ng-if="hasVideo()">
-      <video play-video></video>
-    </div>
-  </span>
+    <span ng-controller="ContentController">
+      <div ng-if="!hasVideo()">
+        <img resize-slide class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
+      </div>
+      <div ng-if="hasVideo()">
+        <video play-video></video>
+      </div>
+    </span>
   {% endverbatim %}
-{% endblock content %}
 
-{% block javascript %}
-  <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
   <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
@@ -38,4 +70,5 @@
         }
       });
   </script>
-{% endblock javascript %}
+</body>
+</html>
