@@ -13,3 +13,21 @@ body {
   top: 0;
   left: 0;
 }
+
+.slide.ng-enter {
+  transition: 0.3s linear all;
+  opacity: 0;
+}
+
+.slide.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.slide.ng-leave {
+  transition: 0.3s linear all;
+  opacity: 1;
+}
+
+.slide.ng-leave.ng-leave-active {
+  opacity: 0;
+}

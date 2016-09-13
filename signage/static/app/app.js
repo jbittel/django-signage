@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('signage', [
-  'ngAnimate',
   'signage.context',
   'signage.slide',
   'signage.video',

@@ -1,4 +1,4 @@
-angular.module('signage.slide', ['djng.urls'])
+angular.module('signage.slide', ['djng.urls', 'ngAnimate'])
 
 .factory('slideService', ['$http', '$timeout', 'displayContext', 'djangoUrl', function($http, $timeout, displayContext, djangoUrl) {
   var currentIndex = 0;
@@ -71,15 +71,4 @@ angular.module('signage.slide', ['djng.urls'])
       resizeBG();
     });
   };
-}])
-
-.animation('.animate', function() {
-  return {
-    enter: function(element, done) {
-      TweenMax.fromTo(element, 1, {opacity: 0}, {opacity: 1, onComplete: done});
-    },
-    leave: function(element, done) {
-      TweenMax.to(element, 1, {opacity: 0, onComplete: done});
-    }
-  };
-});
+}]);
