@@ -15,7 +15,7 @@ body {
 }
 
 .slide.ng-enter {
-  transition: 0.3s linear all;
+  transition: 1s linear all;
   opacity: 0;
 }
 
@@ -24,7 +24,7 @@ body {
 }
 
 .slide.ng-leave {
-  transition: 0.3s linear all;
+  transition: 1s linear all;
   opacity: 1;
 }
 
