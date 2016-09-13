@@ -14,7 +14,7 @@
       <img bg-image class="slide animate" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
     </div>
     <div ng-if="hasVideo()">
-      <video height="240" width="426" play-video></video>
+      <video play-video></video>
     </div>
   </span>
   {% endverbatim %}

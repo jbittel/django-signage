@@ -20,8 +20,11 @@ angular.module('signage.video', ['djng.urls'])
   return service;
 }])
 
-.directive('playVideo', ['videoService', function(videoService) {
+.directive('playVideo', ['$window', 'videoService', function($window, videoService) {
   return function(scope, element, attrs) {
+    element.attr('width', $window.innerWidth);
+    element.attr('height', $window.innerHeight);
+
     if (Hls.isSupported()) {
       var hls = new Hls();
       hls.loadSource(videoService.url);
