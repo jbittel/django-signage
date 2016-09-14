@@ -1,5 +1,5 @@
 {% if video %}
-  <div class="thumbnail {% if not video.active %}inactive{% endif %}">
+  <div class="thumbnail {% if not video.active %}thumbnail-disabled{% endif %}">
     <a href="{% url "signage:video_update" video.pk %}">
       <div class="caption">
         <h3 class="text-center"><span class="glyphicon glyphicon-facetime-video"></span></h3>

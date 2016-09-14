@@ -1,4 +1,4 @@
-<div class="thumbnail {% if not slide.active %}inactive{% endif %}">
+<div class="thumbnail {% if not slide.active %}thumbnail-disabled{% endif %}">
   <a href="{% url "signage:slide_update" slide.pk %}">
     <img src="{{ slide.image.url }}">
     <div class="caption">
