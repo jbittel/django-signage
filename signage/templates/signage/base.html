@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -7,6 +7,7 @@
   <meta name="robots" content="noindex,nofollow">
   <title>{% block title %}Signage{% endblock title %}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static "css/bootstrap-datetimepicker.min.css" %}">
   <style>
     body {
       padding: 20px;
@@ -21,5 +22,18 @@
     {% include "signage/_header.html" %}
     {% block content %}{% endblock content %}
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+  <script src="{% static "js/transition.js" %}"></script>
+  <script src="{% static "js/collapse.js" %}"></script>
+  <script src="{% static "js/bootstrap-datetimepicker.min.js" %}"></script>
+  <script>
+    $(function () {
+      $('.datetimeinput').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+      });
+    });
+  </script>
 </body>
 </html>
