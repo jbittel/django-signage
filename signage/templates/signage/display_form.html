@@ -18,15 +18,10 @@
     </div>
     <div class="col-md-3">
       {% for slide in display.get_slides %}
-        <div class="thumbnail">
-          <a href="{% url "signage:slide_update" slide.pk %}">
-            <img src="{{ slide.image.url }}">
-            <div class="caption">
-              <h3 class="text-center">{{ slide.name }}</h3>
-            </div>
-          </a>
-        </div>
+        {% include "signage/_slide_thumbnail.html" %}
       {% endfor %}
+
+      {% include "signage/_video_thumbnail.html" with video=display.get_video %}
     </div>
   </div>
 {% endblock content %}

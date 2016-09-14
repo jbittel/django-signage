@@ -18,14 +18,7 @@
     </div>
     <div class="col-md-3">
       {% for display in slide.get_displays %}
-        <div class="thumbnail">
-          <a href="{% url "signage:display_update" display.pk %}">
-            <div class="caption">
-              <h3 class="text-center"><span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span></h3>
-              <h3 class="text-center">{{ display.name }}</h3>
-            </div>
-          </a>
-        </div>
+        {% include "signage/_display_thumbnail.html" %}
       {% endfor %}
     </div>
   </div>

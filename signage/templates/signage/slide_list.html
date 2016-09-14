@@ -3,20 +3,10 @@
 {% block title %}{{ block.super }} - Slides{% endblock title %}
 
 {% block content %}
-  {% include "signage/_header.html" %}
-
   <div class="row">
     {% for slide in slide_list %}
       <div class="col-xs-6 col-md-3">
-        <div class="thumbnail {% if not slide.active %}inactive{% endif %}">
-          <a href="{% url "signage:slide_update" slide.pk %}">
-            <img src="{{ slide.image.url }}">
-            <div class="caption">
-              <h3>{{ slide.name }}</h3>
-              <p>{{ slide.description }}</p>
-            </div>
-          </a>
-        </div>
+        {% include "signage/_slide_thumbnail.html" %}
       </div>
     {% endfor %}
   </div>
