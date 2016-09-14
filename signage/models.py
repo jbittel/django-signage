@@ -41,10 +41,12 @@ class Slide(Content):
         upload_to='slides/',
     )
     duration = models.PositiveIntegerField(
-        default=7,
+        default=10,
+        choices=[(i, i) for i in range(5, 65, 5)],
     )
     weight = models.SmallIntegerField(
         default=0,
+        choices=[(i, i) for i in range(-10, 11)],
     )
 
 
@@ -62,6 +64,7 @@ class Display(models.Model):
     )
     update_interval = models.PositiveIntegerField(
         default=10,
+        choices=[(i, i) for i in range(10, 70, 10)],
     )
 
     tags = TaggableManager()
