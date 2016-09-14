@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView
@@ -16,20 +17,25 @@ from .serializers import SlideSerializer
 from .serializers import VideoSerializer
 
 
+class StaffRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_staff
+
+
 class DisplayDetail(DetailView):
     model = Display
 
 
-class DisplayList(ListView):
+class DisplayList(StaffRequiredMixin, ListView):
     model = Display
 
 
-class DisplayCreate(CreateView):
+class DisplayCreate(StaffRequiredMixin, CreateView):
     model = Display
     fields = ['name', 'description', 'update_interval', 'tags']
 
 
-class DisplayDelete(DeleteView):
+class DisplayDelete(StaffRequiredMixin, DeleteView):
     model = Display
     success_url = reverse_lazy('signage:display_list')
 
@@ -50,44 +56,44 @@ class DisplayVideo(RetrieveAPIView):
         return display.get_video()
 
 
-class DisplayUpdate(UpdateView):
+class DisplayUpdate(StaffRequiredMixin, UpdateView):
     model = Display
     fields = ['name', 'description', 'update_interval', 'tags']
 
 
-class SlideList(ListView):
+class SlideList(StaffRequiredMixin, ListView):
     model = Slide
 
 
-class SlideCreate(CreateView):
+class SlideCreate(StaffRequiredMixin, CreateView):
     model = Slide
     fields = ['name', 'description', 'image', 'start', 'end', 'duration', 'weight', 'tags']
 
 
-class SlideDelete(DeleteView):
+class SlideDelete(StaffRequiredMixin, DeleteView):
     model = Slide
     success_url = reverse_lazy('signage:slide_list')
 
 
-class SlideUpdate(UpdateView):
+class SlideUpdate(StaffRequiredMixin, UpdateView):
     model = Slide
     fields = ['name', 'description', 'image', 'start', 'end', 'duration', 'weight', 'tags']
 
 
-class VideoList(ListView):
+class VideoList(StaffRequiredMixin, ListView):
     model = Video
 
 
-class VideoCreate(CreateView):
+class VideoCreate(StaffRequiredMixin, CreateView):
     model = Video
     fields = ['name', 'description', 'url', 'start', 'end', 'tags']
 
 
-class VideoDelete(DeleteView):
+class VideoDelete(StaffRequiredMixin, DeleteView):
     model = Video
     success_url = reverse_lazy('signage:video_list')
 
 
-class VideoUpdate(UpdateView):
+class VideoUpdate(StaffRequiredMixin, UpdateView):
     model = Video
     fields = ['name', 'description', 'url', 'start', 'end', 'tags']
