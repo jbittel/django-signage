@@ -76,7 +76,7 @@ class Display(models.Model):
         return reverse('signage:display_update', args=[self.pk])
 
     def get_slides(self):
-        return Slide.timeframed.filter(tags__name__in=self.tags.names()).order_by('weight').distinct()
+        return Slide.timeframed.filter(tags__name__in=self.tags.names()).order_by('-weight').distinct()
 
     def get_video(self):
         return Video.timeframed.filter(tags__name__in=self.tags.names()).distinct().first()
