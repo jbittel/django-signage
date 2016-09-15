@@ -18,9 +18,6 @@ class Content(TimeFramedModel):
     name = models.CharField(
         max_length=255,
     )
-    description = models.TextField(
-        blank=True,
-    )
 
     tags = TaggableManager()
 
@@ -65,9 +62,6 @@ class Display(models.Model):
     )
     name = models.CharField(
         max_length=255,
-    )
-    description = models.TextField(
-        blank=True,
     )
     update_interval = models.PositiveIntegerField(
         default=10,

@@ -32,7 +32,7 @@ class DisplayList(StaffRequiredMixin, ListView):
 
 class DisplayCreate(StaffRequiredMixin, CreateView):
     model = Display
-    fields = ['name', 'description', 'update_interval', 'tags']
+    fields = ['name', 'update_interval', 'tags']
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -63,7 +63,7 @@ class DisplayVideo(RetrieveAPIView):
 
 class DisplayUpdate(StaffRequiredMixin, UpdateView):
     model = Display
-    fields = ['name', 'description', 'update_interval', 'tags']
+    fields = ['name', 'update_interval', 'tags']
 
 
 class SlideList(StaffRequiredMixin, ListView):
@@ -72,7 +72,7 @@ class SlideList(StaffRequiredMixin, ListView):
 
 class SlideCreate(StaffRequiredMixin, CreateView):
     model = Slide
-    fields = ['name', 'description', 'image', 'start', 'end', 'duration', 'weight', 'tags']
+    fields = ['name', 'image', 'start', 'end', 'duration', 'weight', 'tags']
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -87,7 +87,7 @@ class SlideDelete(StaffRequiredMixin, DeleteView):
 
 class SlideUpdate(StaffRequiredMixin, UpdateView):
     model = Slide
-    fields = ['name', 'description', 'image', 'start', 'end', 'duration', 'weight', 'tags']
+    fields = ['name', 'image', 'start', 'end', 'duration', 'weight', 'tags']
 
 
 class VideoList(StaffRequiredMixin, ListView):
@@ -96,7 +96,7 @@ class VideoList(StaffRequiredMixin, ListView):
 
 class VideoCreate(StaffRequiredMixin, CreateView):
     model = Video
-    fields = ['name', 'description', 'url', 'start', 'end', 'tags']
+    fields = ['name', 'url', 'start', 'end', 'tags']
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -111,4 +111,4 @@ class VideoDelete(StaffRequiredMixin, DeleteView):
 
 class VideoUpdate(StaffRequiredMixin, UpdateView):
     model = Video
-    fields = ['name', 'description', 'url', 'start', 'end', 'tags']
+    fields = ['name', 'url', 'start', 'end', 'tags']
