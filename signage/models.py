@@ -44,15 +44,20 @@ class Slide(Content):
     duration = models.PositiveIntegerField(
         default=10,
         choices=[(i, i) for i in range(5, 65, 5)],
+        help_text='Number of seconds the slide is displayed.',
     )
     weight = models.SmallIntegerField(
         default=0,
         choices=[(i, i) for i in range(-10, 11)],
+        help_text='Relative ordering of slides. Higher values appear earlier in the list.',
     )
 
 
 class Video(Content):
-    url = models.URLField()
+    url = models.URLField(
+        verbose_name='Stream URL',
+        help_text='Absolute path to video streaming URL.'
+    )
 
 
 @python_2_unicode_compatible
@@ -66,6 +71,7 @@ class Display(models.Model):
     update_interval = models.PositiveIntegerField(
         default=10,
         choices=[(i, i) for i in range(10, 70, 10)],
+        help_text='Number of seconds between checks for content changes.',
     )
 
     tags = TaggableManager()
