@@ -34,6 +34,11 @@ class DisplayCreate(StaffRequiredMixin, CreateView):
     model = Display
     fields = ['name', 'description', 'update_interval', 'tags']
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.created_by = self.request.user
+        return super(DisplayCreate, self).form_valid(form)
+
 
 class DisplayDelete(StaffRequiredMixin, DeleteView):
     model = Display
@@ -69,6 +74,11 @@ class SlideCreate(StaffRequiredMixin, CreateView):
     model = Slide
     fields = ['name', 'description', 'image', 'start', 'end', 'duration', 'weight', 'tags']
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.created_by = self.request.user
+        return super(SlideCreate, self).form_valid(form)
+
 
 class SlideDelete(StaffRequiredMixin, DeleteView):
     model = Slide
@@ -87,6 +97,11 @@ class VideoList(StaffRequiredMixin, ListView):
 class VideoCreate(StaffRequiredMixin, CreateView):
     model = Video
     fields = ['name', 'description', 'url', 'start', 'end', 'tags']
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.created_by = self.request.user
+        return super(VideoCreate, self).form_valid(form)
 
 
 class VideoDelete(StaffRequiredMixin, DeleteView):
