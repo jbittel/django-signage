@@ -9,9 +9,15 @@
         <li class="{% active "signage:video_list" %}"><a href="{% url "signage:video_list" %}"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Videos</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url "signage:display_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Display</a></li>
-        <li><a href="{% url "signage:slide_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Slide</a></li>
-        <li><a href="{% url "signage:video_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Video</a></li>
+        {% if perms.signage.add_display %}
+          <li><a href="{% url "signage:display_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Display</a></li>
+        {% endif %}
+        {% if perms.signage.add_slide %}
+          <li><a href="{% url "signage:slide_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Slide</a></li>
+        {% endif %}
+        {% if perms.signage.add_video %}
+          <li><a href="{% url "signage:video_create" %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Video</a></li>
+        {% endif %}
       </ul>
     </div>
   </nav>

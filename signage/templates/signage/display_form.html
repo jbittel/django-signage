@@ -9,9 +9,11 @@
       <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Save</button>
+        {% if not display and perms.signage.add_display or display and perms.signage.change_display %}
+          <button type="submit" class="btn btn-primary">Save</button>
+        {% endif %}
         <a href="{% url "signage:display_list" %}" class="btn btn-default" role="button">Done</a>
-        {% if display %}
+        {% if display and perms.signage.delete_display %}
           <a href="{% url "signage:display_delete" display.pk %}" class="btn btn-danger pull-right" role="button">Delete</a>
         {% endif %}
       </form>
