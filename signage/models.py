@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.contrib.sites.models import Site
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -80,7 +81,7 @@ class Display(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('signage:display_update', args=[self.pk])
+        return Site.objects.get_current().domain + reverse('signage:display_view', args=[self.pk])
 
     def get_slides(self):
         return Slide.timeframed.filter(tags__name__in=self.tags.names()).order_by('-weight').distinct()
