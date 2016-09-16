@@ -38,11 +38,18 @@ angular.module('signage.slide', ['djng.urls', 'ngAnimate'])
 
 .directive('resizeSlide', ['$window', function($window) {
   return function(scope, element, attrs) {
-    element.bind('load', function() {
+    var resize = function() {
       element.css({
         width: $window.innerWidth + 'px',
         height: $window.innerHeight + 'px'
       });
+    };
+
+    var windowElement = angular.element($window);
+    windowElement.resize(resize);
+
+    element.bind('load', function() {
+        resize();
     });
   };
 }]);
