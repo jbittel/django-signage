@@ -19,9 +19,16 @@
     }
 
     .slide {
-      position: fixed;
-      top: 0;
+      bottom: 0;
+      height: auto;
       left: 0;
+      margin: auto;
+      max-height: 100%;
+      max-width: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: auto;
     }
 
     .slide.ng-enter {
@@ -47,7 +54,7 @@
   {% verbatim %}
     <span ng-controller="ContentController">
       <div ng-if="!hasVideo()">
-        <img resize-slide class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
+        <img class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
       </div>
       <div ng-if="hasVideo()">
         <video play-video></video>
