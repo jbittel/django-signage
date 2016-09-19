@@ -34,4 +34,14 @@ angular.module('signage.slide', ['djng.urls', 'ngAnimate'])
   nextSlide();
 
   return service;
+}])
+
+.directive('backgroundColor', [function() {
+  return function(scope, element, attrs) {
+    element.on('load', function() {
+      var vibrant = new Vibrant(element[0]);
+      var swatches = vibrant.swatches()
+      angular.element(document.body).css('background-color', swatches['DarkMuted'].getHex());
+    });
+  };
 }]);

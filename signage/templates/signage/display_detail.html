@@ -60,21 +60,20 @@
     }
   </style>
 </head>
-<body ng-app="signage">
+<body ng-app="signage" ng-controller="ContentController">
   {% verbatim %}
-    <span ng-controller="ContentController">
-      <div ng-if="!hasVideo()">
-        <img class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
-      </div>
-      <div ng-if="hasVideo()">
-        <video play-video></video>
-      </div>
-    </span>
+    <div ng-if="!hasVideo()">
+      <img background-color class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
+    </div>
+    <div ng-if="hasVideo()">
+      <video play-video></video>
+    </div>
   {% endverbatim %}
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
   <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.min.js"></script>
+  <script src="{% static "js/vibrant.js" %}"></script>
   <script src="{% static "djng/js/django-angular.js" %}"></script>
   <script src="{% static "app/app.js" %}"></script>
   <script src="{% static "app/slide/slide.js" %}"></script>
