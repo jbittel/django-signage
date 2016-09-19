@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-9">
       <div class="alert alert-info" role="alert">
-        Signage displayed at <a href="{{ display.get_absolute_url }}" class="alert-link">{{ display.get_absolute_url}}</a>
+        Signage displayed at <a href="{{ display.get_display_url }}" class="alert-link">{{ display.get_display_url}}</a>
       </div>
       <form action="" method="post">
         {% csrf_token %}

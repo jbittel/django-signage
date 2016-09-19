@@ -81,7 +81,10 @@ class Display(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return Site.objects.get_current().domain + reverse('signage:display_view', args=[self.pk])
+        return reverse('signage:display_update', args=[self.pk])
+
+    def get_display_url(self):
+        return "//%s%s" % (Site.objects.get_current().domain, reverse('signage:display_view', args=[self.pk]))
 
     def get_slides(self):
         return Slide.timeframed.filter(tags__name__in=self.tags.names()).order_by('-weight').distinct()
