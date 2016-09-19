@@ -63,7 +63,7 @@
 <body ng-app="signage" ng-controller="ContentController">
   {% verbatim %}
     <div ng-if="!hasVideo()">
-      <img background-color class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}">
+      <img background-color class="slide" ng-repeat="slide in slideService.slides" ng-if="slideService.isCurrentSlide($index)" ng-src="{{ slide.image }}" crossorigin="anonymous">
     </div>
     <div ng-if="hasVideo()">
       <video play-video></video>

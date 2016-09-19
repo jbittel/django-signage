@@ -40,8 +40,13 @@ angular.module('signage.slide', ['djng.urls', 'ngAnimate'])
   return function(scope, element, attrs) {
     element.on('load', function() {
       var vibrant = new Vibrant(element[0]);
-      var swatches = vibrant.swatches()
-      angular.element(document.body).css('background-color', swatches['DarkMuted'].getHex());
+      var swatches = vibrant.swatches();
+      var color = '#000';
+
+      if (swatches.hasOwnProperty('DarkMuted') && swatches['DarkMuted']) {
+        color = swatches['DarkMuted'].getHex();
+      }
+      angular.element(document.body).css('background-color', color);
     });
   };
 }]);
