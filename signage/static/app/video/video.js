@@ -20,7 +20,7 @@ angular.module('signage.video', ['djng.urls'])
   return service;
 }])
 
-.directive('playVideo', ['$window', 'videoService', function($window, videoService) {
+.directive('playVideo', ['videoService', function(videoService) {
   return function(scope, element, attrs) {
     if (Hls.isSupported()) {
       var hls = new Hls();
@@ -36,16 +36,5 @@ angular.module('signage.video', ['djng.urls'])
         hls.destroy();
       });
     }
-
-    element.attr('width', $window.innerWidth);
-    element.attr('height', $window.innerHeight);
-
-    var resize = function() {
-      element.width($window.innerWidth);
-      element.height($window.innerHeight);
-    };
-
-    var windowElement = angular.element($window);
-    windowElement.resize(resize);
   };
 }]);
